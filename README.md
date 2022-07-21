@@ -9,11 +9,13 @@ Framexsは、XHTMLをMVC（モデル・ビュー・コントローラ）の材�
 このフレームワークは、フロントエンドXSLT技術であるxml-stylesheet処理命令を利用しています。
 
 ```
-<?xml-stylesheet type="application/xml" href="../../framexs.xsl"?>
+<?xml-stylesheet type="application/xml" href="framexs.xsl"?>
 ```
 
-サンプルコード
+## サンプルコード
+
 Framexsのサンプルコードを見てみましょう。
+
 以下の図は、Framexsの代表的なディレクトリ構成です。今回は、この構成でのFramexsのはたらきについて取り上げていきます。
 
 * /framexs.xsl
@@ -37,8 +39,8 @@ Framexsのサンプルコードを見てみましょう。
 
 ```content.xhtml
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="application/xml" href="../../framexs.xsl"?>
-<?framexs.skeleton main.ftml?>
+<?xml-stylesheet type="application/xml" href="framexs.xsl"?>
+<?framexs.skeleton template.ftml?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>世界よこんにちは</title>

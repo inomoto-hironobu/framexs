@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 ナンダカフラリ nandaka furari
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
 <?xml-stylesheet type="application/xml" href="framexs.xsl"?>
 <!--
 XSLTで実現するフレームワーク framexs
@@ -27,7 +50,7 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="content" select="$root"></xsl:variable>
 	<xsl:variable name="xhns" select="'http://www.w3.org/1999/xhtml'"/>
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
-	<xsl:variable name="version" select="'1.25.1'"/>
+	<xsl:variable name="version" select="'1.25.2'"/>
 	<xsl:key name="property" match="framexs:property" use="@name"></xsl:key>
 	<xsl:variable name="properties" select="document($properties_loc)/framexs:properties"></xsl:variable>
 
@@ -367,6 +390,9 @@ XSLTで実現するフレームワーク framexs
 			</xsl:attribute>
 		</xsl:if>
 	</xsl:template>
+	<xsl:template match="framexs:text">
+		<xsl:value-of select="."/>
+	</xsl:template>
 	<xsl:template match="framexs:import[@src]">
 		<xsl:apply-templates select="document(@src)/framexs:fragment/node()">
 		</xsl:apply-templates>
@@ -450,7 +476,9 @@ XSLTで実現するフレームワーク framexs
 	</xsl:template>
 
 	<!-- 定義されていないframexs要素は何もしない -->
-	<xsl:template match="framexs:*"></xsl:template>
+	<xsl:template match="framexs:*">
+		<xsl:message>error</xsl:message>
+	</xsl:template>
 	
 	<!-- コンテンツにframexs.baseがあるならbaseのhrefを上書きする -->
 	<xsl:template match="xh:base[@framexs:base='on']">
