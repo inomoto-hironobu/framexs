@@ -50,7 +50,7 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="content" select="$root"></xsl:variable>
 	<xsl:variable name="xhns" select="'http://www.w3.org/1999/xhtml'"/>
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
-	<xsl:variable name="version" select="'1.25.2'"/>
+	<xsl:variable name="version" select="'1.26.0'"/>
 	<xsl:key name="property" match="framexs:property" use="@name"></xsl:key>
 	<xsl:variable name="properties" select="document($properties_loc)/framexs:properties"></xsl:variable>
 
@@ -358,6 +358,26 @@ XSLTで実現するフレームワーク framexs
 			<xsl:copy-of select="$property/node()"/>
 		</xsl:if>
 	</xsl:template>
+	<xsl:template name="property_value">
+		<xsl:param name="name"/>
+		<xsl:variable name="exists">
+			<xsl:apply-templates select="$properties" mode="property_exists">
+				<xsl:with-param name="ref" select="$name"/>
+			</xsl:apply-templates>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="$exists = 'true'">
+				<xsl:apply-templates select="$properties" mode="pull_property">
+					<xsl:with-param name="ref" select="$name"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			<xsl:when test="$properties/framexs:base[@href]">
+				<xsl:apply-templates select="document($properties/framexs:base/@href,$properties)/framexs:properties" mode="pull_property">
+					<xsl:with-param name="ref" select="$name"/>
+				</xsl:apply-templates>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
 	<!-- propertyの呼出し -->
 	<xsl:template match="framexs:property[@name]">
 		<xsl:variable name="exists">
@@ -377,6 +397,24 @@ XSLTで実現するフレームワーク framexs
 				</xsl:apply-templates>
 			</xsl:when>
 		</xsl:choose>
+	</xsl:template>
+	<!--選択式の定義-->
+	<xsl:template match="framexs:switch">
+		<xsl:variable name="name" select="@property"/>
+		<xsl:variable name="val">
+			<xsl:call-template name="property_value">
+				<xsl:with-param name="name" select="$name"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:apply-templates select="framexs:case">
+			<xsl:with-param name="val" select="$val"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	<xsl:template match="framexs:case">
+		<xsl:param name="val"/>
+		<xsl:if test="$val = @value">
+			<xsl:apply-templates/>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="framexs:attribute[@name]">
