@@ -292,16 +292,35 @@ XSLTで実現するフレームワーク framexs
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<xsl:template match="framexs:if[@resource]">
 		<xsl:variable name="name" select="@resource"/>
-		<xsl:variable name="if" select="."></xsl:variable>
-		<xsl:for-each select="$content/processing-instruction('framexs.resource')">
-			<xsl:if test="$name = substring-before(.,' ')">
-				<xsl:apply-templates select="$if/node()">
-				</xsl:apply-templates>
-			</xsl:if>
-		</xsl:for-each>
+		<xsl:variable name="current" select="."></xsl:variable>
+		<xsl:variable name="resource-exists">
+			<xsl:for-each select="$content/processing-instruction('framexs.resource')">
+				<xsl:if test="$name = substring-before(.,' ')">
+					<xsl:text>true</xsl:text>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:variable>
+
+		<xsl:choose>
+			<xsl:when test="$resource-exists = 'true'">
+				<xsl:apply-templates select="$current/node()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="commands" select="$content/processing-instruction('framexs.commands')"/>
+				<xsl:if test="$commands">
+					<xsl:if test="document($commands)">
+						<xsl:for-each select="document($commands)/framexs:commands/framexs:resource">
+							<xsl:if test="$name = substring-before(.,' ')">
+								<xsl:apply-templates select="$current/node()"/>
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:if>
+				</xsl:if>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	<!--
 		<?framexs:resource hoge resource/hoge.xml?>
