@@ -50,7 +50,7 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="content" select="$root"></xsl:variable>
 	<xsl:variable name="xhns" select="'http://www.w3.org/1999/xhtml'"/>
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
-	<xsl:variable name="version" select="'1.26.0'"/>
+	<xsl:variable name="version" select="'1.27.0'"/>
 	<xsl:key name="property" match="framexs:property" use="@name"></xsl:key>
 	<xsl:variable name="properties" select="document($properties_loc)/framexs:properties"></xsl:variable>
 
@@ -155,12 +155,14 @@ XSLTで実現するフレームワーク framexs
 	<!--
 		framexs要素
 	-->
+	<!-- スタイルシートからの呼び出しタグ -->
 	<xsl:template match="framexs:version">
 		<xsl:value-of select="$version"/>
 	</xsl:template>
 	<xsl:template match="framexs:basepath">
 		<xsl:value-of select="$basepath"/>
 	</xsl:template>
+	<!-- コンテンツからの呼び出しタグ -->
 	<xsl:template match="framexs:title">
 		<xsl:value-of select="$content/xh:html/xh:head/xh:title"/>
 	</xsl:template>
@@ -227,6 +229,44 @@ XSLTで実現するフレームワーク framexs
 			<xsl:with-param name="current" select="$current"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	<!-- 
+		<framexs:if meta="test" name=""/>	は <meta name="test" content="val"/>
+		<framexs:if meta="test" property=""/>	は <meta property="test" content="val"/>
+		があれば正としてapply-templatesを発動する
+	-->
+	<xsl:template match="framexs:if[@meta]">
+		<xsl:variable name="current" select="."/>
+		<xsl:for-each select="$content/xh:html/xh:head/xh:meta[@content]">
+			<xsl:choose>
+				<xsl:when test="$current/@name and @name">
+					<xsl:choose>
+						<xsl:when test="@meta = $current/@meta and @content = $current/@content">
+							<xsl:apply-templates select="$current/node()">
+							</xsl:apply-templates>
+						</xsl:when>
+						<xsl:when test="@meta = $current/@meta and not($current/@content)">
+							<xsl:apply-templates select="$current/node()">
+							</xsl:apply-templates>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:when test="$current/@property and @property">
+						<xsl:choose>
+						<xsl:when test="@meta = $current/@meta and @content = $current/@content">
+							<xsl:apply-templates select="$current/node()">
+							</xsl:apply-templates>
+						</xsl:when>
+						<xsl:when test="@meta = $current/@meta and not($current/@content)">
+							<xsl:apply-templates select="$current/node()">
+							</xsl:apply-templates>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>	
+	</xsl:template>
+
+	<!-- 非推奨 -->
 	<xsl:template match="framexs:if-meta[@name]">
 		<xsl:param name="properties"/>
 		<xsl:variable name="if-meta" select="."></xsl:variable>
@@ -256,7 +296,8 @@ XSLTで実現するフレームワーク framexs
 			</xsl:choose>
 		</xsl:for-each>
 	</xsl:template>
-
+	<!-- /非推奨 -->
+	
 	<xsl:template match="framexs:properties" mode="if_property">
 		<xsl:param name="current"/>
 		<xsl:param name="ref"/>
@@ -267,10 +308,12 @@ XSLTで実現するフレームワーク framexs
 			</xsl:apply-templates>
 		</xsl:if>
 	</xsl:template>
+
 	<xsl:template match="framexs:properties" mode="property_exists">
 		<xsl:param name="ref"/>
 		<xsl:if test="key('property',$ref)">true</xsl:if>
 	</xsl:template>
+
 	<xsl:template match="framexs:if[@property]">
 		<xsl:variable name="exists">
 			<xsl:apply-templates select="$properties" mode="property_exists">
@@ -447,6 +490,7 @@ XSLTで実現するフレームワーク framexs
 			</xsl:attribute>
 		</xsl:if>
 	</xsl:template>
+
 	<xsl:template match="framexs:text">
 		<xsl:value-of select="."/>
 	</xsl:template>
