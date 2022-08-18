@@ -16,6 +16,8 @@ Framexsは、XHTMLをMVC（モデル・ビュー・コントローラ）の材�
 
 Framexsのサンプルコードを見てみましょう。
 
+Node.jsがインストールされていれば`npm run server`でlocalhost:8080でアクセスできてサンプルコードが実行されます。
+
 以下の図は、Framexsの代表的なディレクトリ構成です。今回は、この構成でのFramexsのはたらきについて取り上げていきます。
 
 * /framexs.xsl
@@ -31,7 +33,9 @@ Framexsのサンプルコードを見てみましょう。
 </head>
 <body>
 <h1>あいさつ</h1>
-<article><p framexs:id-d="main">コンテンツのid属性がmainの部分を読み込み置き換える</p></article>
+<article>
+<framexs:id name="main"/>
+</article>
 </body>
 </html>
 ```
