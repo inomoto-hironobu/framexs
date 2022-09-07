@@ -1,0 +1,519 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xh="http://www.w3.org/1999/xhtml" targetNamespace="http://www.w3.org/1999/xhtml">
+<group name="flow">
+	<choice>
+		<element ref="xh:div"></element>
+		<element ref="xh:address"></element>
+		<element ref="xh:article"></element>
+		<element ref="xh:blockquote"></element>
+		<element ref="xh:table"></element>
+		<element ref="xh:ul"/>
+		<element ref="xh:ol"/>
+		<element ref="xh:article"/>
+		<element ref="xh:aside"/>
+		<element ref="xh:header"/>
+		<element ref="xh:footer"></element>
+		<element ref="xh:p"/>
+		<element ref="xh:nav"/>
+		<group ref="xh:phrasing"></group>
+	</choice>
+</group>
+<group name="sectioning">
+
+	<choice>
+		<element ref="xh:article"></element>
+		<element ref="xh:aside"></element>
+		<element ref="xh:section"></element>
+		<element ref="xh:nav"></element>
+	</choice>
+</group>
+<group name="interactive">
+	<choice>
+		<element ref="xh:button"></element>
+		<element ref="xh:input"></element>
+		<element ref="xh:details"></element>
+		<element ref="xh:label"></element>
+		<element ref="xh:img"></element>
+		<element ref="xh:select"></element>
+		<element ref="xh:textarea"></element>
+		<element ref="xh:video"></element>
+	</choice>
+</group>
+<group name="phrasing">
+	<choice>
+		<element ref="xh:abbr"/>
+		<element ref="xh:b"/>
+		<element ref="xh:br"/>
+		<element ref="xh:button"/>
+		<element ref="xh:canvas"/>
+		<element ref="xh:canvas"/>
+		<element ref="xh:cite"/>
+		<element ref="xh:code"/>
+		<element ref="xh:dfn"/>
+		<element ref="xh:data"/>
+		<element ref="xh:datalist"/>
+		<element ref="xh:em"/>
+		<element ref="xh:embed"/>
+		<element ref="xh:i"/>
+		<element ref="xh:iframe"/>
+		<element ref="xh:img"/>
+		<element ref="xh:input"/>
+		<element ref="xh:kbd"/>
+		<element ref="xh:label"/>
+		<element ref="xh:link"/>
+		<element ref="xh:mark"></element>
+		<element ref="xh:meter"></element>
+		<element ref="xh:noscript"></element>
+		<element ref="xh:object"></element>
+		<element ref="xh:output"></element>
+	</choice>
+</group>
+<attributeGroup name="common">
+	<attribute name="id"></attribute>
+	<attribute name="lang"></attribute>
+	<attribute name="style"></attribute>
+	<anyAttribute namespace="##any"></anyAttribute>
+</attributeGroup>
+<attributeGroup name="aria">
+	<attribute name="rol"/>
+	<attribute name="aria-labeledby"/>
+	<attribute name="aria-autocomplete"/>
+	<attribute name="aria-checked"/>
+	<attribute name="aria-current"/>
+	<attribute name="aria-disabled"/>
+	<attribute name="aria-errormessage"/>
+	<attribute name="aria-expanded"/>
+	<attribute name="aria-haspopup"/>
+	<attribute name="aria-hidden"/>
+	<attribute name="aria-invalid"/>
+	<attribute name="aria-label"/>
+	<attribute name="aria-level"/>
+	<attribute name="aria-modal"/>
+	<attribute name="aria-multiline"/>
+	<attribute name="aria-multiselectable"/>
+	<attribute name="aria-orientation"/>
+	<attribute name="aria-placeholder"/>
+	<attribute name="aria-pressed"/>
+	<attribute name="aria-readonly"/>
+	<attribute name="aria-required"/>
+	<attribute name="aria-selected"/>
+	<attribute name="aria-sort"/>
+	<attribute name="aria-valuemax"/>
+	<attribute name="aria-valuemin"/>
+	<attribute name="aria-valuenow"/>
+	<attribute name="aria-valuetext"/>
+	<attribute name="aria-live"/>
+	<attribute name="aria-relevant"/>
+	<attribute name="aria-atomic"/>
+	<attribute name="aria-busy"/>
+
+</attributeGroup>
+<attributeGroup name="event">
+
+	<attribute name="onabort"></attribute>
+	<attribute name="onautocomplete"></attribute>
+	<attribute name="onautocompleteerror"></attribute>
+	<attribute name="onblur"></attribute>
+	<attribute name="oncancel"></attribute>
+	<attribute name="oncanplay"></attribute>
+	<attribute name="oncaplaythrough"></attribute>
+	<attribute name="onchange"></attribute>
+	<attribute name="onclick"></attribute>
+	<attribute name="onclose"></attribute>
+	<attribute name="oncontextmenu"></attribute>
+	<attribute name="oncuechange"></attribute>
+	<attribute name="ondbclick"></attribute>
+	<attribute name="ondrag"></attribute>
+	<attribute name="ondragend"></attribute>
+	<attribute name="ondragenter"></attribute>
+	<attribute name="ondragleave"></attribute>
+	<attribute name="ondragover"></attribute>
+	<attribute name="ondragstart"></attribute>
+	<attribute name="ondrop"></attribute>
+	<attribute name="ondurationchange"></attribute>
+	<attribute name="onemptied"></attribute>
+	<attribute name="onended"></attribute>
+	<attribute name="onerror"></attribute>
+	<attribute name="onfocus"></attribute>
+	<attribute name="oninput"></attribute>
+	
+</attributeGroup>
+
+<!--head要素の中身の要素-->
+<!--scriptやlinkはbody要素の中でも使われる-->
+<element name="meta">
+	<complexType>
+		<attribute name="name"></attribute>
+		<attribute name="property"></attribute>
+		<attribute name="content"></attribute>
+		<attribute name="charset"></attribute>
+	</complexType>
+</element>
+<element name="link">
+	<complexType>
+		<attributeGroup ref="xh:common"></attributeGroup>
+		<attribute name="href"></attribute>
+		<attribute name="type"></attribute>
+		<attribute name="rel"></attribute>
+	</complexType>
+</element>
+<element name="script">
+	<complexType mixed="true">
+		<attributeGroup ref="xh:common"></attributeGroup>
+		<attribute name="src"></attribute>
+		<attribute name="type"></attribute>
+	</complexType>
+</element>
+<element name="style">
+	<complexType mixed="true">
+		<attributeGroup ref="xh:common"></attributeGroup>
+	</complexType>
+</element>
+<element name="title">
+	<complexType mixed="true">
+		<attributeGroup ref="xh:common"></attributeGroup>
+	</complexType>
+</element>
+<element name="base">
+	<complexType mixed="true">
+		<attributeGroup ref="xh:common"></attributeGroup>
+		<attribute name="href"></attribute>
+	</complexType>
+</element>
+<element name="head">
+	<complexType>
+		<choice>
+			<element ref="xh:title"></element>
+			<element ref="xh:base" minOccurs="0"></element>
+			<choice minOccurs="0" maxOccurs="unbounded">
+				<element ref="xh:link"></element>
+				<element ref="xh:script"></element>
+				<element ref="xh:style"></element>
+				<element ref="xh:meta"></element>
+			</choice>
+		</choice>
+	</complexType>
+</element>
+<element name="body">
+	<complexType mixed="true">
+		<group ref="xh:flow"></group>
+		<attributeGroup ref="xh:common"/>
+	</complexType>
+</element>
+<element name="html">
+	<complexType>
+		<sequence>
+			<element ref="xh:head"></element>
+			<element ref="xh:body"></element>
+		</sequence>
+		<attribute name="lang"></attribute>
+	</complexType>
+</element>
+<element name="div">
+	<complexType mixed="true">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:flow"></group>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="p"></element>
+<element name="blockquote">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:flow"></group>
+		</choice>
+		<attribute name="cite"></attribute>
+	</complexType>
+</element>
+
+<!---->
+<element name="th">
+	<complexType>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="td">
+	<complexType mixed="true">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+	</complexType>
+</element>
+<element name="tr">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element ref="xh:td"/>
+			<element ref="xh:th"/>
+		</choice>
+	</complexType>
+</element>
+<element name="table">
+	<complexType>
+		<sequence>
+			<element name="caption" minOccurs="0"></element>
+			<element name="colgroup" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="col" minOccurs="0" maxOccurs="unbounded"></element>
+					</sequence>
+				</complexType>
+			</element>
+			<choice>
+				<element ref="xh:tr" minOccurs="0" maxOccurs="unbounded"/>
+				<sequence>
+					<element name="thead" minOccurs="0">
+						<complexType>
+							<sequence>
+								<element ref="xh:tr" minOccurs="0" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="tbody" minOccurs="0" maxOccurs="unbounded"></element>
+					<element name="tfoot" minOccurs="0"></element>
+				</sequence>
+			</choice>
+		</sequence>
+	</complexType>
+</element>
+<!--リスト要素-->
+<element name="li">
+	<complexType>
+		<group ref="xh:flow"></group>
+	</complexType>
+</element>
+<element name="ul">
+	<complexType>
+		<sequence>
+			<element ref="xh:li"></element>
+		</sequence>
+	</complexType>
+</element>
+<element name="ol">
+	<complexType>
+		<sequence>
+			<element ref="xh:li"></element>
+		</sequence>
+	</complexType>
+</element>
+<element name="dt">
+
+</element>
+<element name="dd">
+
+</element>
+<element name="dl">
+	<complexType>
+		<sequence>
+			<element ref="xh:dt" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="xh:dd" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</element>
+
+<element name="nav">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:flow"></group>
+		</choice>
+	</complexType>
+</element>
+
+<element name="abbr">
+	<complexType mixed="true">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="b">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="cite">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="code">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="dfn">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="em">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="input">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="kbd">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="fieldset"></element>
+<element name="figure"></element>
+<element name="form"></element>
+<element name="hr"></element>
+<element name="i"></element>
+<element name="iframe"></element>
+<element name="img"></element>
+
+<element name="ins"></element>
+
+
+
+<element name="main"></element>
+<element name="article"></element>
+<element name="header"></element>
+<element name="aside"></element>
+<element name="footer"></element>
+<element name="section"></element>
+<element name="a">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+		<attribute name="href"/>
+		<attribute name="hreftype"></attribute>
+	</complexType>
+</element>
+
+<element name="address">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:flow"/>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+<element name="audio"></element>
+
+<element name="bdo"></element>
+<element name="bdi"></element>
+<element name="br"></element>
+<element name="button"></element>
+<element name="canvas"></element>
+
+<element name="data"></element>
+<element name="datalist"></element>
+<element name="del"></element>
+<element name="details">
+	<complexType>
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<group ref="xh:phrasing"/>
+			<element name="summary"></element>
+		</choice>
+		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="xh:aria"/>
+		<attributeGroup ref="xh:event"/>
+	</complexType>
+</element>
+
+<element name="embed"></element>
+
+<complexType name="heading">
+	<choice minOccurs="0" maxOccurs="unbounded">
+		<group ref="xh:phrasing"/>
+		<element name="summary"></element>
+	</choice>
+	<attributeGroup ref="xh:common"/>
+	<attributeGroup ref="xh:aria"/>
+	<attributeGroup ref="xh:event"/>
+</complexType>
+<element name="h1" type="xh:heading"></element>
+<element name="h2" type="xh:heading"></element>
+<element name="h3" type="xh:heading"></element>
+<element name="h4" type="xh:heading"></element>
+<element name="h5" type="xh:heading"></element>
+<element name="h6" type="xh:heading"></element>
+
+<element name="label"></element>
+<element name="map"></element>
+<element name="mark"></element>
+<element name="menu"></element>
+<element name="meter"></element>
+
+<element name="noscript"></element>
+<element name="object"></element>
+<element name="output"></element>
+<element name="picture"></element>
+<element name="pre"></element>
+<element name="progress"></element>
+<element name="q"></element>
+<element name="ruby"></element>
+<element name="s"></element>
+<element name="samp"></element>
+<element name="select"></element>
+<element name="small"></element>
+<element name="span"></element>
+<element name="strong"></element>
+<element name="sub"></element>
+<element name="sup"></element>
+<element name="svg"></element>
+<element name="template"></element>
+<element name="textarea"></element>
+<element name="time"></element>
+<element name="u"></element>
+<element name="var"></element>
+<element name="video"></element>
+<element name="wbr"></element>
+
+</schema>

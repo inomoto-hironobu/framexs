@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fc="framexs-commands" targetNamespace="framexs-commands">
+    <element name="skeleton">
+        <complexType mixed="true">
+        </complexType>
+    </element>
+    <element name="resource">
+        <complexType mixed="true">
+
+        </complexType>
+    </element>
+    <element name="commands">
+        <complexType>
+            <choice>
+                <element ref="fc:skeleton"></element>
+                <element ref="fc:resource"></element>
+            </choice>
+        </complexType>
+    </element>
+</schema>

@@ -26,7 +26,7 @@ THE SOFTWARE.
 <!--
 XSLTで実現するフレームワーク framexs
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:framexs="urn:framexs" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:framexs="urn:framexs" xmlns:fp="framexs-properties" xmlns:fc="framexs-commands" version="1.0">
 	<xsl:output encoding="UTF-8" media-type="text/html" method="html" doctype-system="about:legacy-compat"/>
 
 	<!-- skeleton_locが指定されればXHTMLテンプレート処理を行う -->
@@ -41,7 +41,7 @@ XSLTで実現するフレームワーク framexs
 				<xsl:value-of select="$skeleton_loc"></xsl:value-of>
 			</xsl:when>
 			<xsl:when test="$commands_loc">
-				<xsl:value-of select="document($commands_loc)/framexs:commands/framexs:skeleton/text()"></xsl:value-of>
+				<xsl:value-of select="document($commands_loc)/fc:commands/fc:skeleton/text()"></xsl:value-of>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:variable>
@@ -50,9 +50,12 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="content" select="$root"></xsl:variable>
 	<xsl:variable name="xhns" select="'http://www.w3.org/1999/xhtml'"/>
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
-	<xsl:variable name="version" select="'1.27.0'"/>
-	<xsl:key name="property" match="framexs:property" use="@name"></xsl:key>
-	<xsl:variable name="properties" select="document($properties_loc)/framexs:properties"></xsl:variable>
+	<xsl:variable name="fpns" select="framexs-properties"/>
+	<xsl:variable name="fcns" select="framexs-commands"/>
+	<xsl:variable name="version" select="'1.28.0'"/>
+	<xsl:key name="property" match="fp:property" use="@name"></xsl:key>
+	<xsl:variable name="properties" select="document($properties_loc)/fp:properties"></xsl:variable>
+
 
 	<xsl:template match="/">
 		<xsl:message>framexs <xsl:value-of select="$version"/></xsl:message>
@@ -203,6 +206,27 @@ XSLTで実現するフレームワーク framexs
 			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
+	<!-- framexs-propertisファイルの呼び出し -->
+	<xsl:template match="framexs:property[@name]">
+		<xsl:variable name="exists">
+			<xsl:apply-templates select="$properties" mode="property_exists">
+				<xsl:with-param name="ref" select="@name"/>
+			</xsl:apply-templates>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="$exists = 'true'">
+				<xsl:apply-templates select="$properties" mode="pull_property">
+					<xsl:with-param name="ref" select="@name"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			<xsl:when test="$properties/fp:base[@href]">
+				<xsl:apply-templates select="document($properties/fp:base/@href,$properties)/fp:properties" mode="pull_property">
+					<xsl:with-param name="ref" select="@name"/>
+				</xsl:apply-templates>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+	
 	<!--
 		if文を定義。id,meta,property,resource
 	-->
@@ -298,7 +322,7 @@ XSLTで実現するフレームワーク framexs
 	</xsl:template>
 	<!-- /非推奨 -->
 	
-	<xsl:template match="framexs:properties" mode="if_property">
+	<xsl:template match="fp:properties" mode="if_property">
 		<xsl:param name="current"/>
 		<xsl:param name="ref"/>
 		<xsl:variable name="property" select="key('property',$ref)"/>
@@ -309,7 +333,7 @@ XSLTで実現するフレームワーク framexs
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="framexs:properties" mode="property_exists">
+	<xsl:template match="fp:properties" mode="property_exists">
 		<xsl:param name="ref"/>
 		<xsl:if test="key('property',$ref)">true</xsl:if>
 	</xsl:template>
@@ -327,8 +351,8 @@ XSLTで実現するフレームワーク framexs
 					<xsl:with-param name="ref" select="@property"/>
 				</xsl:apply-templates>
 			</xsl:when>
-			<xsl:when test="$properties/framexs:base[@href]">
-				<xsl:apply-templates select="document($properties/framexs:base/@href,$properties)/framexs:properties" mode="if_property">
+			<xsl:when test="$properties/fp:base[@href]">
+				<xsl:apply-templates select="document($properties/fp:base/@href,$properties)/fp:properties" mode="if_property">
 					<xsl:with-param name="current" select="."/>
 					<xsl:with-param name="ref" select="@property"/>
 				</xsl:apply-templates>
@@ -355,7 +379,7 @@ XSLTで実現するフレームワーク framexs
 				<xsl:variable name="commands" select="$content/processing-instruction('framexs.commands')"/>
 				<xsl:if test="$commands">
 					<xsl:if test="document($commands)">
-						<xsl:for-each select="document($commands)/framexs:commands/framexs:resource">
+						<xsl:for-each select="document($commands)/fc:commands/fc:resource">
 							<xsl:if test="$name = substring-before(.,' ')">
 								<xsl:apply-templates select="$current/node()"/>
 							</xsl:if>
@@ -387,8 +411,8 @@ XSLTで実現するフレームワーク framexs
 				</xsl:for-each>
 			</xsl:when>
 			<!-- framexs.commandsで指定されたコマンドファイルからresourceを探し出す -->
-			<xsl:when test="document($commands_loc)/framexs:commands/framexs:resource">
-				<xsl:for-each select="document($commands_loc)/framexs:commands/framexs:resource">
+			<xsl:when test="document($commands_loc)/fc:commands/fc:resource">
+				<xsl:for-each select="document($commands_loc)/fc:commands/fc:resource">
 					<xsl:if test="$name = substring-before(text(),' ')">
 						<xsl:call-template name="resource">
 							<xsl:with-param name="src" select="substring-after(text(),' ')"/>
@@ -413,7 +437,7 @@ XSLTで実現するフレームワーク framexs
 	</xsl:template>
 
 	
-	<xsl:template match="framexs:properties" mode="pull_property">
+	<xsl:template match="fp:properties" mode="pull_property">
 		<xsl:param name="ref"/>
 		<xsl:variable name="property" select="key('property',$ref)"/>
 		<xsl:if test="$property">
@@ -433,33 +457,14 @@ XSLTで実現するフレームワーク framexs
 					<xsl:with-param name="ref" select="$name"/>
 				</xsl:apply-templates>
 			</xsl:when>
-			<xsl:when test="$properties/framexs:base[@href]">
-				<xsl:apply-templates select="document($properties/framexs:base/@href,$properties)/framexs:properties" mode="pull_property">
+			<xsl:when test="$properties/fp:base[@href]">
+				<xsl:apply-templates select="document($properties/fp:base/@href,$properties)/fp:properties" mode="pull_property">
 					<xsl:with-param name="ref" select="$name"/>
 				</xsl:apply-templates>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
-	<!-- propertyの呼出し -->
-	<xsl:template match="framexs:property[@name]">
-		<xsl:variable name="exists">
-			<xsl:apply-templates select="$properties" mode="property_exists">
-				<xsl:with-param name="ref" select="@name"/>
-			</xsl:apply-templates>
-		</xsl:variable>
-		<xsl:choose>
-			<xsl:when test="$exists = 'true'">
-				<xsl:apply-templates select="$properties" mode="pull_property">
-					<xsl:with-param name="ref" select="@name"/>
-				</xsl:apply-templates>
-			</xsl:when>
-			<xsl:when test="$properties/framexs:base[@href]">
-				<xsl:apply-templates select="document($properties/framexs:base/@href,$properties)/framexs:properties" mode="pull_property">
-					<xsl:with-param name="ref" select="@name"/>
-				</xsl:apply-templates>
-			</xsl:when>
-		</xsl:choose>
-	</xsl:template>
+
 	<!--選択式の定義-->
 	<xsl:template match="framexs:switch">
 		<xsl:variable name="name" select="@property"/>
@@ -541,8 +546,8 @@ XSLTで実現するフレームワーク framexs
 					<xsl:with-param name="ref" select="@ref-property"/>
 				</xsl:apply-templates>
 			</xsl:when>
-			<xsl:when test="$properties/framexs:base[@href]">
-				<xsl:apply-templates select="document($properties/framexs:base/@href,$properties)/framexs:properties" mode="list">
+			<xsl:when test="$properties/fp:base[@href]">
+				<xsl:apply-templates select="document($properties/fp:base/@href,$properties)/fp:properties" mode="list">
 					<xsl:with-param name="current" select="."/>
 					<xsl:with-param name="ref" select="@ref-property"/>
 				</xsl:apply-templates>
@@ -550,7 +555,7 @@ XSLTで実現するフレームワーク framexs
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="framexs:properties" mode="list">
+	<xsl:template match="fp:properties" mode="list">
 		<xsl:param name="current"/>
 		<xsl:param name="ref"/>
 		<xsl:variable name="property" select="key('property',$ref)"/>
