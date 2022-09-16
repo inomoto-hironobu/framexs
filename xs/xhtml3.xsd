@@ -1,78 +1,95 @@
 <?xml version="1.0"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xh="http://www.w3.org/1999/xhtml" targetNamespace="http://www.w3.org/1999/xhtml">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.w3.org/1999/xhtml" targetNamespace="http://www.w3.org/1999/xhtml">
 <group name="flow">
 	<choice>
-		<element ref="xh:div"></element>
-		<element ref="xh:address"></element>
-		<element ref="xh:article"></element>
-		<element ref="xh:blockquote"></element>
-		<element ref="xh:table"></element>
-		<element ref="xh:ul"/>
-		<element ref="xh:ol"/>
-		<element ref="xh:article"/>
-		<element ref="xh:aside"/>
-		<element ref="xh:header"/>
-		<element ref="xh:footer"></element>
-		<element ref="xh:p"/>
-		<element ref="xh:nav"/>
-		<group ref="xh:phrasing"></group>
+		<element ref="tns:div"></element>
+		<element ref="tns:address"></element>
+		<element ref="tns:article"></element>
+		<element ref="tns:blockquote"></element>
+		<element ref="tns:table"></element>
+		<element ref="tns:ul"/>
+		<element ref="tns:ol"/>
+		<element ref="tns:aside"/>
+		<element ref="tns:header"/>
+		<element ref="tns:footer"></element>
+		<element ref="tns:p"/>
+		<element ref="tns:nav"/>
+		<element ref="tns:h1"/>
+		<element ref="tns:h2"/>
+		<element ref="tns:h3"/>
+		<element ref="tns:h4"/>
+		<element ref="tns:h5"/>
+		<element ref="tns:h6"/>
+		<element ref="tns:pre"/>
+		<any processContents="skip"></any>
+		<group ref="tns:phrasing"></group>
 	</choice>
 </group>
 <group name="sectioning">
 
 	<choice>
-		<element ref="xh:article"></element>
-		<element ref="xh:aside"></element>
-		<element ref="xh:section"></element>
-		<element ref="xh:nav"></element>
+		<element ref="tns:article"></element>
+		<element ref="tns:aside"></element>
+		<element ref="tns:section"></element>
+		<element ref="tns:nav"></element>
 	</choice>
 </group>
 <group name="interactive">
 	<choice>
-		<element ref="xh:button"></element>
-		<element ref="xh:input"></element>
-		<element ref="xh:details"></element>
-		<element ref="xh:label"></element>
-		<element ref="xh:img"></element>
-		<element ref="xh:select"></element>
-		<element ref="xh:textarea"></element>
-		<element ref="xh:video"></element>
+		<element ref="tns:button"></element>
+		<element ref="tns:input"></element>
+		<element ref="tns:details"></element>
+		<element ref="tns:label"></element>
+		<element ref="tns:img"></element>
+		<element ref="tns:select"></element>
+		<element ref="tns:textarea"></element>
+		<element ref="tns:video"></element>
 	</choice>
 </group>
 <group name="phrasing">
 	<choice>
-		<element ref="xh:abbr"/>
-		<element ref="xh:b"/>
-		<element ref="xh:br"/>
-		<element ref="xh:button"/>
-		<element ref="xh:canvas"/>
-		<element ref="xh:canvas"/>
-		<element ref="xh:cite"/>
-		<element ref="xh:code"/>
-		<element ref="xh:dfn"/>
-		<element ref="xh:data"/>
-		<element ref="xh:datalist"/>
-		<element ref="xh:em"/>
-		<element ref="xh:embed"/>
-		<element ref="xh:i"/>
-		<element ref="xh:iframe"/>
-		<element ref="xh:img"/>
-		<element ref="xh:input"/>
-		<element ref="xh:kbd"/>
-		<element ref="xh:label"/>
-		<element ref="xh:link"/>
-		<element ref="xh:mark"></element>
-		<element ref="xh:meter"></element>
-		<element ref="xh:noscript"></element>
-		<element ref="xh:object"></element>
-		<element ref="xh:output"></element>
+		<element ref="tns:abbr"/>
+		<element ref="tns:b"/>
+		<element ref="tns:br"/>
+		<element ref="tns:button"/>
+		<element ref="tns:canvas"/>
+		<element ref="tns:cite"/>
+		<element ref="tns:code"/>
+		<element ref="tns:dfn"/>
+		<element ref="tns:data"/>
+		<element ref="tns:datalist"/>
+		<element ref="tns:em"/>
+		<element ref="tns:embed"/>
+		<element ref="tns:i"/>
+		<element ref="tns:iframe"/>
+		<element ref="tns:img"/>
+		<element ref="tns:input"/>
+		<element ref="tns:kbd"/>
+		<element ref="tns:label"/>
+		<element ref="tns:link"/>
+		<element ref="tns:mark"></element>
+		<element ref="tns:meter"></element>
+		<element ref="tns:noscript"></element>
+		<element ref="tns:object"></element>
+		<element ref="tns:output"></element>
 	</choice>
 </group>
-<attributeGroup name="common">
+<attributeGroup name="global">
 	<attribute name="id"></attribute>
+	<attribute name="class"></attribute>
+	<attribute name="is"></attribute>
+	<attribute name="hidden"></attribute>
+	<attribute name="inputmode"></attribute>
 	<attribute name="lang"></attribute>
 	<attribute name="style"></attribute>
-	<anyAttribute namespace="##any"></anyAttribute>
+	<attribute name="entrykeyhint"></attribute>
+	<attribute name="draggable"></attribute>
+	<attribute name="dir"></attribute>
+	<attribute name="contextmenu"></attribute>
+	<attribute name="contenteditable"></attribute>
+	<attribute name="autofocus"></attribute>
+	<attribute name="autocapitalize"></attribute>
+	<attribute name="accesskey"></attribute>
 </attributeGroup>
 <attributeGroup name="aria">
 	<attribute name="rol"/>
@@ -151,7 +168,7 @@
 </element>
 <element name="link">
 	<complexType>
-		<attributeGroup ref="xh:common"></attributeGroup>
+		<attributeGroup ref="tns:global"></attributeGroup>
 		<attribute name="href"></attribute>
 		<attribute name="type"></attribute>
 		<attribute name="rel"></attribute>
@@ -159,71 +176,77 @@
 </element>
 <element name="script">
 	<complexType mixed="true">
-		<attributeGroup ref="xh:common"></attributeGroup>
+		<attributeGroup ref="tns:global"></attributeGroup>
 		<attribute name="src"></attribute>
 		<attribute name="type"></attribute>
 	</complexType>
 </element>
 <element name="style">
 	<complexType mixed="true">
-		<attributeGroup ref="xh:common"></attributeGroup>
+		<attributeGroup ref="tns:global"></attributeGroup>
 	</complexType>
 </element>
 <element name="title">
 	<complexType mixed="true">
-		<attributeGroup ref="xh:common"></attributeGroup>
+		<attributeGroup ref="tns:global"></attributeGroup>
 	</complexType>
 </element>
 <element name="base">
 	<complexType mixed="true">
-		<attributeGroup ref="xh:common"></attributeGroup>
+		<attributeGroup ref="tns:global"></attributeGroup>
 		<attribute name="href"></attribute>
 	</complexType>
 </element>
 <element name="head">
 	<complexType>
-		<choice>
-			<element ref="xh:title"></element>
-			<element ref="xh:base" minOccurs="0"></element>
+		<sequence>
 			<choice minOccurs="0" maxOccurs="unbounded">
-				<element ref="xh:link"></element>
-				<element ref="xh:script"></element>
-				<element ref="xh:style"></element>
-				<element ref="xh:meta"></element>
+				<element ref="tns:link"></element>
+				<element ref="tns:script"></element>
+				<element ref="tns:style"></element>
+				<element ref="tns:meta"></element>
 			</choice>
-		</choice>
+			<element ref="tns:title"></element>
+			<element ref="tns:base" minOccurs="0"></element>
+			<choice minOccurs="0" maxOccurs="unbounded">
+				<element ref="tns:link"></element>
+				<element ref="tns:script"></element>
+				<element ref="tns:style"></element>
+				<element ref="tns:meta"></element>
+			</choice>
+		</sequence>
 	</complexType>
 </element>
 <element name="body">
 	<complexType mixed="true">
-		<group ref="xh:flow"></group>
-		<attributeGroup ref="xh:common"/>
+		<group ref="tns:flow" minOccurs="0" maxOccurs="unbounded"></group>
+		<attributeGroup ref="tns:global"/>
 	</complexType>
 </element>
 <element name="html">
 	<complexType>
 		<sequence>
-			<element ref="xh:head"></element>
-			<element ref="xh:body"></element>
+			<element ref="tns:head"></element>
+			<element ref="tns:body"></element>
 		</sequence>
 		<attribute name="lang"></attribute>
 	</complexType>
 </element>
+
 <element name="div">
 	<complexType mixed="true">
-		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:flow"></group>
-		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<group ref="tns:flow" minOccurs="0" maxOccurs="unbounded"></group>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
+		<anyAttribute processContents="skip"></anyAttribute>
 	</complexType>
 </element>
 <element name="p"></element>
 <element name="blockquote">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:flow"></group>
+			<group ref="tns:flow"></group>
 		</choice>
 		<attribute name="cite"></attribute>
 	</complexType>
@@ -232,23 +255,24 @@
 <!---->
 <element name="th">
 	<complexType>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="td">
 	<complexType mixed="true">
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
+		<attributeGroup ref="tns:global"/>
 	</complexType>
 </element>
 <element name="tr">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<element ref="xh:td"/>
-			<element ref="xh:th"/>
+			<element ref="tns:td"/>
+			<element ref="tns:th"/>
 		</choice>
 	</complexType>
 </element>
@@ -264,12 +288,12 @@
 				</complexType>
 			</element>
 			<choice>
-				<element ref="xh:tr" minOccurs="0" maxOccurs="unbounded"/>
+				<element ref="tns:tr" minOccurs="0" maxOccurs="unbounded"/>
 				<sequence>
 					<element name="thead" minOccurs="0">
 						<complexType>
 							<sequence>
-								<element ref="xh:tr" minOccurs="0" maxOccurs="unbounded"/>
+								<element ref="tns:tr" minOccurs="0" maxOccurs="unbounded"/>
 							</sequence>
 						</complexType>
 					</element>
@@ -282,21 +306,21 @@
 </element>
 <!--リスト要素-->
 <element name="li">
-	<complexType>
-		<group ref="xh:flow"></group>
+	<complexType mixed="true">
+		<group ref="tns:flow" minOccurs="0" maxOccurs="unbounded"></group>
 	</complexType>
 </element>
 <element name="ul">
 	<complexType>
 		<sequence>
-			<element ref="xh:li"></element>
+			<element ref="tns:li" minOccurs="0" maxOccurs="unbounded"></element>
 		</sequence>
 	</complexType>
 </element>
 <element name="ol">
 	<complexType>
 		<sequence>
-			<element ref="xh:li"></element>
+			<element ref="tns:li" minOccurs="0" maxOccurs="unbounded"></element>
 		</sequence>
 	</complexType>
 </element>
@@ -308,9 +332,9 @@
 </element>
 <element name="dl">
 	<complexType>
-		<sequence>
-			<element ref="xh:dt" minOccurs="0" maxOccurs="unbounded"/>
-			<element ref="xh:dd" minOccurs="0" maxOccurs="unbounded"/>
+		<sequence minOccurs="0" maxOccurs="unbounded">
+			<element ref="tns:dt" minOccurs="0" maxOccurs="unbounded"/>
+			<element ref="tns:dd" minOccurs="0" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
 </element>
@@ -318,7 +342,7 @@
 <element name="nav">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:flow"></group>
+			<group ref="tns:flow"></group>
 		</choice>
 	</complexType>
 </element>
@@ -326,81 +350,81 @@
 <element name="abbr">
 	<complexType mixed="true">
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="b">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="cite">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="code">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="dfn">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="em">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="input">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="kbd">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="fieldset"></element>
@@ -422,13 +446,13 @@
 <element name="footer"></element>
 <element name="section"></element>
 <element name="a">
-	<complexType>
+	<complexType mixed="true">
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 		<attribute name="href"/>
 		<attribute name="hreftype"></attribute>
 	</complexType>
@@ -437,11 +461,11 @@
 <element name="address">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:flow"/>
+			<group ref="tns:flow"/>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 <element name="audio"></element>
@@ -458,32 +482,31 @@
 <element name="details">
 	<complexType>
 		<choice minOccurs="0" maxOccurs="unbounded">
-			<group ref="xh:phrasing"/>
+			<group ref="tns:phrasing"/>
 			<element name="summary"></element>
 		</choice>
-		<attributeGroup ref="xh:common"/>
-		<attributeGroup ref="xh:aria"/>
-		<attributeGroup ref="xh:event"/>
+		<attributeGroup ref="tns:global"/>
+		<attributeGroup ref="tns:aria"/>
+		<attributeGroup ref="tns:event"/>
 	</complexType>
 </element>
 
 <element name="embed"></element>
 
-<complexType name="heading">
+<complexType name="heading" mixed="true">
 	<choice minOccurs="0" maxOccurs="unbounded">
-		<group ref="xh:phrasing"/>
-		<element name="summary"></element>
+		<group ref="tns:phrasing"/>
 	</choice>
-	<attributeGroup ref="xh:common"/>
-	<attributeGroup ref="xh:aria"/>
-	<attributeGroup ref="xh:event"/>
+	<attributeGroup ref="tns:global"/>
+	<attributeGroup ref="tns:aria"/>
+	<attributeGroup ref="tns:event"/>
 </complexType>
-<element name="h1" type="xh:heading"></element>
-<element name="h2" type="xh:heading"></element>
-<element name="h3" type="xh:heading"></element>
-<element name="h4" type="xh:heading"></element>
-<element name="h5" type="xh:heading"></element>
-<element name="h6" type="xh:heading"></element>
+<element name="h1" type="tns:heading"></element>
+<element name="h2" type="tns:heading"></element>
+<element name="h3" type="tns:heading"></element>
+<element name="h4" type="tns:heading"></element>
+<element name="h5" type="tns:heading"></element>
+<element name="h6" type="tns:heading"></element>
 
 <element name="label"></element>
 <element name="map"></element>

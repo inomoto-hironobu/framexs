@@ -26,7 +26,14 @@ THE SOFTWARE.
 <!--
 XSLTで実現するフレームワーク framexs
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:framexs="urn:framexs" xmlns:fp="framexs-properties" xmlns:fc="framexs-commands" version="1.0">
+<xsl:stylesheet
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xh="http://www.w3.org/1999/xhtml"
+	xmlns:framexs="urn:framexs"
+	xmlns:fp="urn:framexs-properties"
+	xmlns:fc="urn:framexs-commands"
+	xmlns:fr="urn:framexs-resource"
+	version="1.0">
 	<xsl:output encoding="UTF-8" media-type="text/html" method="html" doctype-system="about:legacy-compat"/>
 
 	<!-- skeleton_locが指定されればXHTMLテンプレート処理を行う -->
@@ -52,14 +59,14 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
 	<xsl:variable name="fpns" select="framexs-properties"/>
 	<xsl:variable name="fcns" select="framexs-commands"/>
-	<xsl:variable name="version" select="'1.28.0'"/>
+	<xsl:variable name="version" select="'1.29.0'"/>
 	<xsl:key name="property" match="fp:property" use="@name"></xsl:key>
 	<xsl:variable name="properties" select="document($properties_loc)/fp:properties"></xsl:variable>
 
 
 	<xsl:template match="/">
 		<xsl:message>framexs <xsl:value-of select="$version"/></xsl:message>
-		<xsl:message><xsl:value-of select="$basepath"></xsl:value-of></xsl:message>
+		<xsl:message><xsl:value-of select="$skeleton_path"></xsl:value-of></xsl:message>
 		<!-- 基本的な処理分けを行う。XHTMLか一般XMLか -->
 		<xsl:choose>
 			<xsl:when test="$skeleton_path and namespace-uri(*[1]) = $xhns">
@@ -428,7 +435,7 @@ XSLTで実現するフレームワーク framexs
 		<xsl:variable name="resource" select="document($src)"></xsl:variable>
 		<xsl:choose>
 			<xsl:when test="$resource">
-				<xsl:apply-templates mode="content" select="$resource/framexs:resource/node()"/>
+				<xsl:apply-templates mode="content" select="$resource/fr:resource/node()"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message>読み込み失敗：<xsl:value-of select="$src"/></xsl:message>

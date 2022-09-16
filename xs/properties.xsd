@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fp="framexs-properties" targetNamespace="framexs-properties">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:framexs-properties" targetNamespace="urn:framexs-properties">
     <element name="property">
         <complexType mixed="true">
             <choice minOccurs="0" maxOccurs="unbounded">
@@ -10,7 +10,7 @@
     <element name="properties">
         <complexType>
             <sequence>
-                <element ref="fp:property" minOccurs="0" maxOccurs="unbounded"></element>
+                <element ref="tns:property" minOccurs="0" maxOccurs="unbounded"></element>
             </sequence>
         </complexType>
     </element>
