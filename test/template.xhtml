@@ -9,5 +9,9 @@
 <framexs:id name="main"/>
 </article>
 <framexs:resource name="test"/>
+<framexs:if-meta property="framexs-theme">
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({"theme":<framexs:meta property="framexs-theme"/>});
+</framexs:if-meta>
 </body>
 </html>
