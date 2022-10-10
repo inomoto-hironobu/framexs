@@ -59,7 +59,7 @@ XSLTで実現するフレームワーク framexs
 	<xsl:variable name="fmxns" select="'urn:framexs'"/>
 	<xsl:variable name="fpns" select="framexs-properties"/>
 	<xsl:variable name="fcns" select="framexs-commands"/>
-	<xsl:variable name="version" select="'1.29.1'"/>
+	<xsl:variable name="version" select="'1.29.2'"/>
 	<xsl:key name="property" match="fp:property" use="@name"></xsl:key>
 	<xsl:variable name="properties" select="document($properties_loc)/fp:properties"></xsl:variable>
 
@@ -71,9 +71,20 @@ XSLTで実現するフレームワーク framexs
 		<xsl:choose>
 			<xsl:when test="$skeleton_path and namespace-uri(*[1]) = $xhns">
 				<xsl:message>exec content</xsl:message>
-				<xsl:apply-templates select="document($skeleton_path)/*">
-					<xsl:with-param name="content" select="$root"/>
-				</xsl:apply-templates>
+				<xsl:choose>
+					<xsl:when test="$skeleton_loc">
+						<!-- framexs.skeletonが設定されているならコンテンツのパスを基にする-->
+						<xsl:apply-templates select="document($skeleton_path,.)/*">
+							<xsl:with-param name="content" select="$root"/>
+						</xsl:apply-templates>
+					</xsl:when>
+					<xsl:when test="$commands_loc">
+						<!-- framexs.commandが設定されているならコマンドファイルのパスを基にする-->
+						<xsl:apply-templates select="document($skeleton_path,document($commands_loc))/*">
+							<xsl:with-param name="content" select="$root"/>
+						</xsl:apply-templates>
+					</xsl:when>
+				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message>一般XML</xsl:message>
@@ -475,9 +486,12 @@ XSLTで実現するフレームワーク framexs
 		</xsl:if>
 	</xsl:template>
 
+	<!--テキストを出力する-->
 	<xsl:template match="framexs:text">
 		<xsl:value-of select="."/>
 	</xsl:template>
+
+	<!-- srcで指定されたXMLのフラグメントを引っ張る-->
 	<xsl:template match="framexs:import[@src]">
 		<xsl:apply-templates select="document(@src)/framexs:fragment/node()">
 		</xsl:apply-templates>
