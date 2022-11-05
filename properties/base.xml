@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<framexs:properties xmlns:framexs="urn:framexs-properties" xmlns="http://www.w3.org/1999/xhtml" xmlns:yc="urn:yaohata-components">
+<framexs:property name="site-name">八百幡</framexs:property>
+<framexs:property name="copyright">©2021 INOMOTO Hironobu</framexs:property>
+<framexs:property name="center-class">col-md-8</framexs:property>
+<framexs:property name="nav">
+<li title="基礎">/contents/base/index.xhtml</li>
+<li title="入門">/contents/introduction/index.xhtml</li>
+<li title="応用">/contents/application/index.xhtml</li>
+<li title="API">/contents/api/index.xhtml</li>
+</framexs:property>
+<framexs:property name="footer-in-head">
+<script src="/js/gh.js"></script>
+<script src="/js/yaohata.js"></script>
+<link rel="stylesheet" href="/css/style.css"/>
+</framexs:property>
+<framexs:property name="sidebar1">display</framexs:property>
+</framexs:properties>

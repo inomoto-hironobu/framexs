@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xml:lang="ja" lang="ja">
+
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title> - テンプレートタイトル</title>
+
+  </head>
+
+  <body>
+
+    <h1>あいさつ</h1>
+
+    <article>
+
+
+      <p>ハローワールド！</p>
+
+
+    </article>
+
+test
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:framexs" xmlns:xh="http://www.w3.org/1999/xhtml" targetNamespace="urn:framexs">
+<import namespace="http://www.w3.org/1999/xhtml" schemaLocation="xhtml3.xsd"/>
+
+<group name="flow">
+	<choice>
+		<group ref="xh:flow"></group>
+		<element ref="tns:if"></element>
+		<element ref="tns:if-meta"></element>
+		<element ref="tns:id"></element>
+		<element ref="tns:version"></element>
+		<element ref="tns:basepath"></element>
+		<element ref="tns:title"></element>
+		<element ref="tns:meta"></element>
+		<element ref="tns:property"></element>
+		<element ref="tns:resource"></element>
+		<element ref="tns:switch"></element>
+	</choice>
+</group>
+<element name="if"></element>
+<element name="if-meta"></element>
+<element name="id"></element>
+<element name="version"></element>
+<element name="basepath"></element>
+<element name="title"></element>
+<element name="script"></element>
+<element name="style"></element>
+<element name="link"></element>
+<element name="meta"></element>
+<element name="property"></element>
+<element name="resource"></element>
+<element name="switch"></element>
+<element name="attribute"></element>
+<element name="text"></element>
+<element name="import"></element>
+<element name="list"></element>
+<element name="item"></element>
+<element name="item-attr"></element>
+</schema>
