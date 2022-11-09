@@ -46,20 +46,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/framexs/index.xhtml">
-         Home
-         <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item"><a class="nav-link" href="contents/introduction">入門</a></li>
-      <li class="nav-item"><a class="nav-link" href="contents/base">基礎</a></li>
-      <li class="nav-item"><a class="nav-link" href="contents/application">応用</a></li>
-      <li class="nav-item"><a class="nav-link" href="contents/base"></a></li>
-    </ul>
-  </div>
+  
 </nav>
 </header>
 
@@ -68,40 +55,41 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 <div class="container">
 
 <div class="row">
-<div class="d-block d-md-none col-md-12">
-<button>リンク表示</button>
+<aside class="collapse d-md-block col-md-4 bg-white" id="navbarSupportedContent">
+<div class="nav-item active">
+  <a class="nav-link" href="/framexs/index.xhtml">Home</a>
 </div>
-<aside id="sidebar1-wide" class="d-none d-md-block col-md-4 bg-white">
+<div class="">
+<div class="">
 <ul>
-<li><ul>
-  <li><a href="contents/introduction/howto.xhtml">Framexs入門</a></li>
-  <li><a href="contents/introduction/merit.xhtml">Framexsの利点</a></li>
-  <li><a href="contents/introduction/tools.xhtml">開発ツール</a></li>
-  <li><a href="contents/introduction/usage.xhtml">使い方</a></li>
-  <li><a href="contents/introduction/feature.xhtml">特徴</a></li>
-  <li><a href="contents/introduction/theme.xhtml">テーマとは何か</a></li>
-  </ul></li>
-<li><ul>
-  <li><a href="contents/base/description.xhtml">解説</a></li>
-  <li><a href="contents/base/ftml.xhtml">FTML</a></li>
-  <li><a href="contents/base/contents.xhtml">コンテンツ</a></li>
-  <li><a href="contents/base/properties.xhtml">プロパティズ</a></li>
-  <li><a href="contents/base/commands.xhtml">コマンド</a></li>
-  <li><a href="contents/base/theme.xhtml">テーマ</a></li>
-  <li><a href="contents/base/wordpress.xhtml">ワードプレス</a></li>
-  </ul></li>
-<li><ul>
-  <li><a href="contents/api/title.xhtml">title</a></li>
-  <li><a href="contents/api/api.xhtml">API一覧</a></li>
-  <li><a href="contents/api/id.xhtml">id</a></li>
-  <li><a href="contents/api/property.xhtml">property</a></li>
-  <li><a href="contents/api/attribute.xhtml">attribute</a></li>
-  <li><a href="contents/api/list.xhtml">リスト</a></li>
-  <li><a href="contents/api/import.xhtml">import</a></li>
-  <li><a href="contents/api/if.xhtml">if構文</a></li>
-  </ul>
-  </li>
+<li><a href="contents/introduction/howto.xhtml">Framexs入門</a></li>
+<li><a href="contents/introduction/merit.xhtml">Framexsの利点</a></li>
+<li><a href="contents/introduction/tools.xhtml">開発ツール</a></li>
+<li><a href="contents/introduction/usage.xhtml">使い方</a></li>
+<li><a href="contents/introduction/feature.xhtml">特徴</a></li>
+<li><a href="contents/introduction/theme.xhtml">テーマとは何か</a></li>
 </ul>
+<ul>
+<li><a href="contents/base/description.xhtml">解説</a></li>
+<li><a href="contents/base/ftml.xhtml">FTML</a></li>
+<li><a href="contents/base/contents.xhtml">コンテンツ</a></li>
+<li><a href="contents/base/properties.xhtml">プロパティズ</a></li>
+<li><a href="contents/base/commands.xhtml">コマンド</a></li>
+<li><a href="contents/base/theme.xhtml">テーマ</a></li>
+<li><a href="contents/base/wordpress.xhtml">ワードプレス</a></li>
+</ul>
+<ul>
+<li><a href="contents/api/title.xhtml">title</a></li>
+<li><a href="contents/api/api.xhtml">API一覧</a></li>
+<li><a href="contents/api/id.xhtml">id</a></li>
+<li><a href="contents/api/property.xhtml">property</a></li>
+<li><a href="contents/api/attribute.xhtml">attribute</a></li>
+<li><a href="contents/api/list.xhtml">リスト</a></li>
+<li><a href="contents/api/import.xhtml">import</a></li>
+<li><a href="contents/api/if.xhtml">if構文</a></li>
+</ul>
+</div>
+</div>
 </aside>
 
 
