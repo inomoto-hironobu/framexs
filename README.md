@@ -2,6 +2,7 @@ Framexsとは
 ---
 Framexsは、XHTMLをMVC（モデル・ビュー・コントローラ）の材料として、合成を行い、HTMLを生成するXSLTフレームワークです。
 
+## 解説
 モデルとビューの両方ともXHTMLを使い、ウェブサイトではコントローラーもXHTMLに処理命令という形で埋めこんでいます。
 
 [ナンダカフラリ](https://github.com/nandaka-furari)氏によって作られました。[原作](https://github.com/nandaka-furari/framexs)
@@ -11,8 +12,9 @@ Framexsは、XHTMLをMVC（モデル・ビュー・コントローラ）の材�
 ```
 <?xml-stylesheet type="application/xml" href="framexs.xsl"?>
 ```
+## 使い方
 
-## サンプルコード
+## デモ
 
 Framexsのサンプルコードを見てみましょう。
 
@@ -76,3 +78,9 @@ contents.xhtmlをブラウザで表示すると、以下のようになります
 </html>
 ```
 このように、元々のcontents.xhtmlからソースコードが変化していることが分かります。tempalte.xhtmlによって定義したテンプレートに従い、Fremexsがコードを書き換えているのです。
+
+## 環境
+
+## インストール
+
+## 注意事項
